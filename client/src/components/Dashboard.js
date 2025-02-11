@@ -13,7 +13,7 @@ function Dashboard() {
     <h2>{customerDetails.firstName}</h2>
     <h2>{customerDetails.lastName} </h2>
   
-    <img className="pic2" src={`http://localhost:4569/${customerDetails.profile}`} alt='abcdert'></img>
+    <img className="pic2" src={`/${customerDetails.profile}`} alt='abcdert'></img>
 
     </div>
   )

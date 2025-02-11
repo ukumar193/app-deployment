@@ -3,11 +3,13 @@ const express = require("express");
 const cors = require("cors");
 const multer = require("multer");
 const jwt = require("jsonwebtoken");
+const path =require("path");
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 app.use("/uploads", express.static("uploads"));
+app.use(express.static(path.join(__dirname,"./client/build")));
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -25,6 +27,9 @@ app.listen(4569, async () => {
   console.log("port number 4569");
 });
 
+app.get("*",(req,res)=>{
+  res.sendFile("./client/build/index.html")
+});/**here */
 app.post("/signup", upload.array("profilepic"), async (req, res) => {
   console.log(req.body);
   console.log(req.files);
