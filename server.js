@@ -76,14 +76,14 @@ app.post("/login", upload.none(), async (req, res) => {
       };
       res.json({
         status: "success",
-        msg: "credentials are correct",
+        msg: "login successfully ",
         data: dataToSend,
       });
     } else {
-      res.json({ status: "fail", msg: "credentials are not correct" });
+      res.json({ status: "fail", msg: "invalid password" });
     }
   } else {
-    res.json({ status: "fail", msg: "user does not exist" });
+    res.json({ status: "fail", msg: "invalid email" });
   }
 });
 app.post("/validatetoken", upload.none(), async (req, res) => {

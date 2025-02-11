@@ -8,13 +8,9 @@ function Login() {
   let navigate = useNavigate();
   let dispatch = useDispatch();
   useEffect(() => {
-    // if (localStorage.getItem("email") && localStorage.getItem("password")) {
-    //   emailInputRef.current.value = localStorage.getItem("email");
-    //   passwordInputRef.current.value = localStorage.getItem("password");
-    //   onLogin();
-    // }
+   
     if (localStorage.getItem("token")) {
-      // onValidToken();
+ onValidToken();
     }
   }, []);
   let onValidToken = async () => {
@@ -35,6 +31,10 @@ function Login() {
   };
 
   let onLogin = async () => {
+    if (!emailInputRef.current.value || !passwordInputRef.current.value) {
+      alert("Please enter both email and password.");
+      return;
+    }
     let dataToSend = new FormData();
     dataToSend.append("email", emailInputRef.current.value);
     dataToSend.append("password", passwordInputRef.current.value);
@@ -45,12 +45,10 @@ function Login() {
     };
     let JSONData = await fetch("/login", reqOptions);
     let JSOData = await JSONData.json();
-    console.log(JSOData);
+    console.log(JSOData.msg);
 
     if (JSOData.status === "success") {
-      /**web token starts from here  */
-      /* localStorage.setItem("email", emailInputRef.current.value);
-      localStorage.setItem("password", passwordInputRef.current.value);*/
+     
       localStorage.setItem("token", JSOData.data.token);
       /**--> */ dispatch({ type: "login", data: JSOData.data });
       navigate("/dashboard");
