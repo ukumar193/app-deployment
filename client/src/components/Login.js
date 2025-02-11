@@ -10,7 +10,7 @@ function Login() {
   useEffect(() => {
   
     if (localStorage.getItem("token")) {
-       onValidToken();
+      //  onValidToken();
     }
   }, []);
   let onValidToken = async () => {
