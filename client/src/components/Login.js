@@ -27,10 +27,16 @@ function Login() {
     if (JSOData.status === "success") {
       dispatch({ type: "login", data: JSOData.data });
       navigate("/dashboard");
+      
     }
+    alert(JSOData.msg);
   };
 
   let onLogin = async () => {
+    if (!emailInputRef.current.value || !passwordInputRef.current.value) {
+      alert("Please enter both email and password.");
+      return;
+    }
     let dataToSend = new FormData();
     dataToSend.append("email", emailInputRef.current.value);
     dataToSend.append("password", passwordInputRef.current.value);
@@ -50,6 +56,7 @@ function Login() {
       localStorage.setItem("token", JSOData.data.token);
       /**--> */ dispatch({ type: "login", data: JSOData.data });
       navigate("/dashboard");
+      alert(JSOData.msg);
     }
    else  alert(JSOData.msg);
   };
